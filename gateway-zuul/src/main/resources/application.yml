@@ -1,0 +1,39 @@
+server:
+  port: 999
+spring:
+  application:
+    name: zuul
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #json日期格式
+    time-zone: GMT+8 #北京时间 
+zuul:
+  add-host-header: true #为了获取代理前的域名
+  sensitive-headers: 
+  retryable: true #开启重试
+  routes:    user-service: /user/**
+    order-service: /order/**
+    auths-service: /auths/**
+#开启熔断
+feign:
+  hystrix:
+    enabled: true 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            #6000毫秒超时
+            timeoutInMilliseconds: 7000
+        timeout:
+          enabled: true
+#timeoutInMilliseconds = 总ConnectTimeout+(1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout
+ribbon:
+  ReadTimeout: 2500 #响应请求超时时间
+  ConnectTimeout: 1000 #创建连接超时时间
+  MaxAutoRetries: 0 #最大自动重试次数
+  MaxAutoRetriesNextServer: 1 #最大自动重试下一个服务的次数

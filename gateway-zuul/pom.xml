@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ydy</groupId>
+		<artifactId>hosptial</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>gateway-zuul</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-zuul -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
+			<version>1.4.3.RELEASE</version>
+		</dependency>
+		<!-- zuul网关的重试机制，不是使用ribbon内置的重试机制 是借助spring-retry组件实现的重试 开启zuul网关重试机制需要增加下述依赖 -->
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ydy</groupId>
+			<artifactId>commons</artifactId>
+			<version>${self.version}</version>
+		</dependency>
+	</dependencies>
+</project>
